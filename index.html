@@ -155,7 +155,7 @@ h2.section-title strong{font-weight:900;color:inherit}
 }
 .hero-grid{
   position:relative;z-index:1;
-  display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:stretch;
+  display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;
 }
 .hero-eyebrow{
   display:inline-flex;align-items:center;gap:8px;
@@ -203,12 +203,12 @@ h1.hero-title .strike::after{
   flex-direction:column;
   min-height:0;
 }
-/* Full-height product preview: matches left column (headline stack) */
+/* Product preview: natural height — avoids inner scroll clipping the demo */
 .hero-dashboard-embed{
   display:flex;
   flex-direction:column;
-  flex:1;
-  min-height:max(340px,calc(3 * 1.05 * clamp(38px,5.5vw,64px) + 11rem));
+  flex:0 1 auto;
+  width:100%;
   background:var(--surface);
   border:1px solid var(--border);
   border-radius:18px;
@@ -216,8 +216,8 @@ h1.hero-title .strike::after{
   box-shadow:0 16px 48px rgba(0,0,0,0.35),0 0 0 1px rgba(255,255,255,0.04) inset;
 }
 .hero-dashboard-frame-wrap{
-  flex:1;
-  min-height:0;
+  flex:0 1 auto;
+  width:100%;
   position:relative;
 }
 .hero-dashboard-frame{
@@ -416,6 +416,41 @@ h1.hero-title .strike::after{
   position:relative;z-index:1;
 }
 
+/* Product section — illustrative UI (inline SVG, single-file safe) */
+.product-screens{margin:8px 0 52px}
+.product-screens-lead{
+  font-size:13px;color:var(--muted);line-height:1.5;max-width:42em;margin-bottom:20px;
+}
+.product-screens-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+  align-items:stretch;
+}
+.product-screen{
+  margin:0;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.product-screen figcaption{
+  font-family:'Outfit',sans-serif;
+  font-size:13px;
+  font-weight:700;
+  color:var(--text2);
+  letter-spacing:-0.2px;
+}
+.product-screen-frame{
+  border-radius:14px;
+  border:1px solid var(--border);
+  background:#0d1117;
+  overflow:hidden;
+  box-shadow:0 10px 32px rgba(0,0,0,0.28),inset 0 1px 0 rgba(255,255,255,0.04);
+  aspect-ratio:16/10;
+  line-height:0;
+}
+.product-screen-frame svg{display:block;width:100%;height:100%}
+
 /* ─────────────────────────────
    6. METRICS
 ───────────────────────────── */
@@ -574,7 +609,7 @@ footer a:hover{color:var(--accent)}
   .section{padding:80px 24px}
   .hero-grid{grid-template-columns:1fr;gap:40px}
   .hero-dashboard-embed{flex:0 1 auto;min-height:0}
-  .hero-dashboard-frame-wrap{min-height:min(460px,62vh)}
+  .hero-dashboard-frame-wrap{min-height:0}
   .wounds{grid-template-columns:1fr}
   .whynow-grid{grid-template-columns:1fr}
   .sol-row{grid-template-columns:1fr;gap:12px}
@@ -587,14 +622,16 @@ footer a:hover{color:var(--accent)}
   .trust-inner{flex-direction:column;text-align:center;gap:8px}
   .trust-strip-grid{grid-template-columns:1fr}
   .trust-strip-item{text-align:center}
+  .product-screens-grid{grid-template-columns:1fr}
 }
 
 /* Inlined chip demo (no iframe — works on GitHub Pages as a single file) */
-.hero-chip-embed-shell{position:absolute;inset:0;overflow:hidden;}
+.hero-chip-embed-shell{position:relative;width:100%;overflow:hidden;}
 .hero-chip-embed{
-  height:100%;
-  padding:8px 10px;
-  overflow:hidden;
+  height:auto;
+  min-height:0;
+  padding:8px 10px 10px;
+  overflow:visible;
   display:flex;
   flex-direction:column;
   box-sizing:border-box;
@@ -603,14 +640,13 @@ footer a:hover{color:var(--accent)}
   background:var(--surface);
   border:1px solid var(--border);
   border-radius:10px;
-  padding:12px 14px 16px;
-  flex:1;
+  padding:12px 14px 14px;
+  flex:0 1 auto;
   min-height:0;
   display:flex;
   flex-direction:column;
   overflow-x:hidden;
-  overflow-y:auto;
-  -webkit-overflow-scrolling:touch;
+  overflow-y:visible;
 }
 .hero-chip-embed .hero-chip-card-title{
   font-size:0.88rem;
@@ -661,11 +697,12 @@ footer a:hover{color:var(--accent)}
 }
 .hero-chip-embed .chart-wrap{
   position:relative;
-  flex:0 1 auto;
-  min-height:140px;
-  height:auto;
+  flex:0 0 auto;
+  min-height:0;
+  height:96px;
+  max-height:96px;
   width:100%;
-  margin-top:8px;
+  margin-top:6px;
 }
 </style>
 </head>
@@ -913,6 +950,104 @@ footer a:hover{color:var(--accent)}
       <div class="pipe-num">04</div>
       <div class="pipe-name">Act</div>
       <div class="pipe-tech">Ops · CMMS · API</div>
+    </div>
+  </div>
+
+  <div class="product-screens">
+    <p class="product-screens-lead reveal delay-1">Three illustrative views — inline SVG only, no external assets.</p>
+    <div class="product-screens-grid">
+      <figure class="product-screen reveal delay-1">
+        <figcaption>Thermal Intelligence</figcaption>
+        <div class="product-screen-frame">
+          <svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <linearGradient id="ps-grad-thermal" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#00d4aa"/><stop offset="1" stop-color="#58a6ff"/></linearGradient>
+              <clipPath id="ps-ti-plot"><rect x="18" y="118" width="284" height="56"/></clipPath>
+            </defs>
+            <rect width="320" height="200" fill="#0d1117"/>
+            <rect width="320" height="3" fill="url(#ps-grad-thermal)"/>
+            <rect x="10" y="10" width="300" height="26" rx="6" fill="#161b22" stroke="#30363d"/>
+            <text x="18" y="26" fill="#e6edf3" font-size="11" font-family="Outfit,system-ui,sans-serif" font-weight="700">Hall A · rack inlet ΔT</text>
+            <text x="238" y="26" fill="#f85149" font-size="9" font-family="JetBrains Mono,monospace">Hotspot</text>
+            <g transform="translate(10,42)">
+              <text x="0" y="-2" fill="#6e7681" font-size="8" font-family="JetBrains Mono,monospace">00–23h</text>
+              <rect x="0" y="4" width="14" height="10" fill="#1e3a5f" rx="1"/><rect x="16" y="4" width="14" height="10" fill="#2a5f7a" rx="1"/><rect x="32" y="4" width="14" height="10" fill="#3d7a6a" rx="1"/><rect x="48" y="4" width="14" height="10" fill="#5a8a4a" rx="1"/><rect x="64" y="4" width="14" height="10" fill="#7a9a38" rx="1"/><rect x="80" y="4" width="14" height="10" fill="#9a8a28" rx="1"/><rect x="96" y="4" width="14" height="10" fill="#b87a20" rx="1"/><rect x="112" y="4" width="14" height="10" fill="#c86a18" rx="1"/><rect x="128" y="4" width="14" height="10" fill="#d85a14" rx="1"/><rect x="144" y="4" width="14" height="10" fill="#e04a10" rx="1"/><rect x="160" y="4" width="14" height="10" fill="#e85049" rx="1"/><rect x="176" y="4" width="14" height="10" fill="#e04040" rx="1"/><rect x="192" y="4" width="14" height="10" fill="#d03038" rx="1"/><rect x="208" y="4" width="14" height="10" fill="#c02832" rx="1"/><rect x="224" y="4" width="14" height="10" fill="#a82030" rx="1"/><rect x="240" y="4" width="14" height="10" fill="#8a1828" rx="1"/><rect x="256" y="4" width="14" height="10" fill="#6a1420" rx="1"/><rect x="272" y="4" width="14" height="10" fill="#4a1018" rx="1"/>
+              <rect x="0" y="18" width="14" height="10" fill="#2a4a6a" rx="1"/><rect x="16" y="18" width="14" height="10" fill="#3a6a7a" rx="1"/><rect x="32" y="18" width="14" height="10" fill="#4a8a6a" rx="1"/><rect x="48" y="18" width="14" height="10" fill="#6a9a4a" rx="1"/><rect x="64" y="18" width="14" height="10" fill="#8aaa38" rx="1"/><rect x="80" y="18" width="14" height="10" fill="#9a9a30" rx="1"/><rect x="96" y="18" width="14" height="10" fill="#aa8a28" rx="1"/><rect x="112" y="18" width="14" height="10" fill="#b87a22" rx="1"/><rect x="128" y="18" width="14" height="10" fill="#c86a1c" rx="1"/><rect x="144" y="18" width="14" height="10" fill="#d45a18" rx="1"/><rect x="160" y="18" width="14" height="10" fill="#dc5014" rx="1"/><rect x="176" y="18" width="14" height="10" fill="#e04812" rx="1"/><rect x="192" y="18" width="14" height="10" fill="#e04010" rx="1"/><rect x="208" y="18" width="14" height="10" fill="#d83810" rx="1"/><rect x="224" y="18" width="14" height="10" fill="#c83010" rx="1"/><rect x="240" y="18" width="14" height="10" fill="#a82810" rx="1"/><rect x="256" y="18" width="14" height="10" fill="#882010" rx="1"/><rect x="272" y="18" width="14" height="10" fill="#681810" rx="1"/>
+              <rect x="0" y="32" width="14" height="10" fill="#1e3a5f" rx="1"/><rect x="16" y="32" width="14" height="10" fill="#2e5a72" rx="1"/><rect x="32" y="32" width="14" height="10" fill="#4a7a62" rx="1"/><rect x="48" y="32" width="14" height="10" fill="#629a42" rx="1"/><rect x="64" y="32" width="14" height="10" fill="#7aaa32" rx="1"/><rect x="80" y="32" width="14" height="10" fill="#92aa28" rx="1"/><rect x="96" y="32" width="14" height="10" fill="#a89a22" rx="1"/><rect x="112" y="32" width="14" height="10" fill="#b88a1c" rx="1"/><rect x="128" y="32" width="14" height="10" fill="#c87a18" rx="1"/><rect x="144" y="32" width="14" height="10" fill="#d46a14" rx="1"/><rect x="160" y="32" width="14" height="10" fill="#dc5a12" rx="1"/><rect x="176" y="32" width="14" height="10" fill="#e05010" rx="1"/><rect x="192" y="32" width="14" height="10" fill="#e04810" rx="1"/><rect x="208" y="32" width="14" height="10" fill="#d84010" rx="1"/><rect x="224" y="32" width="14" height="10" fill="#c03812" rx="1"/><rect x="240" y="32" width="14" height="10" fill="#a03014" rx="1"/><rect x="256" y="32" width="14" height="10" fill="#802818" rx="1"/><rect x="272" y="32" width="14" height="10" fill="#602020" rx="1"/>
+            </g>
+            <rect x="12" y="94" width="296" height="94" rx="8" fill="#161b22" stroke="#30363d"/>
+            <text x="22" y="110" fill="#8b949e" font-size="8" font-family="JetBrains Mono,monospace" font-weight="600">Inlet temp · 24h</text>
+            <rect x="22" y="118" width="10" height="3" rx="1" fill="#00d4aa"/>
+            <text x="36" y="124" fill="#6e7681" font-size="7" font-family="JetBrains Mono,monospace">Actual</text>
+            <rect x="92" y="118" width="10" height="3" rx="1" fill="#d29922"/>
+            <text x="106" y="124" fill="#6e7681" font-size="7" font-family="JetBrains Mono,monospace">ML +72h</text>
+            <g clip-path="url(#ps-ti-plot)">
+              <line x1="18" y1="128" x2="302" y2="128" stroke="#30363d" stroke-opacity="0.4"/>
+              <line x1="18" y1="140" x2="302" y2="140" stroke="#30363d" stroke-opacity="0.4"/>
+              <line x1="18" y1="152" x2="302" y2="152" stroke="#30363d" stroke-opacity="0.4"/>
+              <line x1="18" y1="164" x2="302" y2="164" stroke="#30363d" stroke-opacity="0.4"/>
+              <polyline fill="none" stroke="#00d4aa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="22,168 42,166 62,167 82,164 102,161 122,162 142,158 162,155 182,152 202,148 222,146 242,142 262,140 282,138 298,136"/>
+              <polyline fill="none" stroke="#d29922" stroke-width="1.8" stroke-dasharray="4 3" stroke-linecap="round" stroke-linejoin="round" points="142,158 162,152 182,154 202,145 222,142 242,138 262,134 282,131 298,128"/>
+            </g>
+          </svg>
+        </div>
+      </figure>
+      <figure class="product-screen reveal delay-2">
+        <figcaption>Cooling &amp; plant health</figcaption>
+        <div class="product-screen-frame">
+          <svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs><linearGradient id="ps-grad-cool" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#00d4aa"/><stop offset="1" stop-color="#58a6ff"/></linearGradient></defs>
+            <rect width="320" height="200" fill="#0d1117"/>
+            <rect width="320" height="3" fill="url(#ps-grad-cool)"/>
+            <text x="14" y="26" fill="#e6edf3" font-size="11" font-family="Outfit,system-ui,sans-serif" font-weight="700">Fleet · CDU / CRAC risk</text>
+            <text x="14" y="42" fill="#6e7681" font-size="8" font-family="JetBrains Mono,monospace">RUL · drift · correlated rack stress</text>
+            <rect x="12" y="54" width="296" height="38" rx="8" fill="#161b22" stroke="#30363d"/>
+            <text x="24" y="72" fill="#8b949e" font-size="9" font-family="system-ui,sans-serif">CDU-A14</text>
+            <text x="24" y="84" fill="#3fb950" font-size="8" font-family="JetBrains Mono,monospace">RUL 186 d · OK</text>
+            <rect x="200" y="64" width="96" height="6" rx="2" fill="#21262d"/><rect x="200" y="64" width="78" height="6" rx="2" fill="#3fb950"/>
+            <rect x="12" y="100" width="296" height="38" rx="8" fill="#161b22" stroke="#30363d"/>
+            <text x="24" y="118" fill="#8b949e" font-size="9" font-family="system-ui,sans-serif">CDU-B02</text>
+            <text x="24" y="130" fill="#d29922" font-size="8" font-family="JetBrains Mono,monospace">RUL 41 d · Watch</text>
+            <rect x="200" y="110" width="96" height="6" rx="2" fill="#21262d"/><rect x="200" y="110" width="34" height="6" rx="2" fill="#d29922"/>
+            <rect x="12" y="146" width="296" height="38" rx="8" fill="#161b22" stroke="#f85149" stroke-opacity="0.45"/>
+            <text x="24" y="164" fill="#8b949e" font-size="9" font-family="system-ui,sans-serif">Chiller train · Hall A</text>
+            <text x="24" y="176" fill="#f85149" font-size="8" font-family="JetBrains Mono,monospace">Margin low vs rack A-14 peak</text>
+            <rect x="200" y="156" width="96" height="6" rx="2" fill="#21262d"/><rect x="200" y="156" width="22" height="6" rx="2" fill="#f85149"/>
+          </svg>
+        </div>
+      </figure>
+      <figure class="product-screen reveal delay-3">
+        <figcaption>Operations planner</figcaption>
+        <div class="product-screen-frame">
+          <svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs><linearGradient id="ps-grad-ops" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#00d4aa"/><stop offset="1" stop-color="#58a6ff"/></linearGradient></defs>
+            <rect width="320" height="200" fill="#0d1117"/>
+            <rect width="320" height="3" fill="url(#ps-grad-ops)"/>
+            <text x="14" y="26" fill="#e6edf3" font-size="11" font-family="Outfit,system-ui,sans-serif" font-weight="700">Work queue · thermal risk</text>
+            <text x="14" y="42" fill="#6e7681" font-size="8" font-family="JetBrains Mono,monospace">CMMS-ready · sorted by score</text>
+            <line x1="12" y1="52" x2="308" y2="52" stroke="#30363d"/>
+            <text x="18" y="68" fill="#6e7681" font-size="7" font-family="JetBrains Mono,monospace">WO</text>
+            <text x="52" y="68" fill="#6e7681" font-size="7" font-family="JetBrains Mono,monospace">Asset</text>
+            <text x="220" y="68" fill="#6e7681" font-size="7" font-family="JetBrains Mono,monospace">Window</text>
+            <rect x="14" y="76" width="292" height="22" rx="4" fill="#161b22" stroke="#30363d"/>
+            <text x="22" y="91" fill="#f85149" font-size="8" font-family="JetBrains Mono,monospace">4412</text>
+            <text x="52" y="91" fill="#e6edf3" font-size="8" font-family="system-ui,sans-serif">A-14 inlet / CDU coupling</text>
+            <rect x="210" y="84" width="88" height="8" rx="2" fill="#f85149" fill-opacity="0.35"/>
+            <rect x="14" y="104" width="292" height="22" rx="4" fill="#161b22" stroke="#30363d"/>
+            <text x="22" y="119" fill="#d29922" font-size="8" font-family="JetBrains Mono,monospace">4418</text>
+            <text x="52" y="119" fill="#e6edf3" font-size="8" font-family="system-ui,sans-serif">CRAC setpoint review · Zone 2</text>
+            <rect x="210" y="112" width="64" height="8" rx="2" fill="#d29922" fill-opacity="0.4"/>
+            <rect x="14" y="132" width="292" height="22" rx="4" fill="#161b22" stroke="#30363d"/>
+            <text x="22" y="147" fill="#58a6ff" font-size="8" font-family="JetBrains Mono,monospace">4421</text>
+            <text x="52" y="147" fill="#e6edf3" font-size="8" font-family="system-ui,sans-serif">Pump vibration · follow-up</text>
+            <rect x="210" y="140" width="48" height="8" rx="2" fill="#58a6ff" fill-opacity="0.35"/>
+            <rect x="14" y="160" width="292" height="22" rx="4" fill="#161b22" stroke="#30363d"/>
+            <text x="22" y="175" fill="#3fb950" font-size="8" font-family="JetBrains Mono,monospace">4424</text>
+            <text x="52" y="175" fill="#e6edf3" font-size="8" font-family="system-ui,sans-serif">PM · scheduled (low risk)</text>
+            <rect x="210" y="168" width="72" height="8" rx="2" fill="#3fb950" fill-opacity="0.3"/>
+          </svg>
+        </div>
+      </figure>
     </div>
   </div>
 

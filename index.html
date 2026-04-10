@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- GitHub Pages: put this file in the site root as index.html (Settings → Pages → branch/folder). No other files required; Chart.js loads from CDN. -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -442,7 +441,34 @@ h1.hero-title .strike::after{
 .metric-src{font-family:'JetBrains Mono';font-size:10.5px;color:rgba(255,255,255,0.25);margin-top:6px}
 
 /* ─────────────────────────────
-   7. CTA
+   7. CLOSING PITCH
+───────────────────────────── */
+.closing-arg-section{
+  padding:72px 48px 56px;
+  max-width:1120px;
+  margin:0 auto;
+  text-align:center;
+}
+.closing-arg-section .closing-arg-title{
+  font-family:'Outfit';
+  font-size:clamp(22px,3vw,30px);
+  font-weight:800;
+  letter-spacing:-0.5px;
+  line-height:1.25;
+  color:var(--text);
+  max-width:36em;
+  margin:0 auto 16px;
+}
+.closing-arg-section .closing-arg-lead{
+  font-size:17px;
+  line-height:1.55;
+  color:var(--muted);
+  max-width:40em;
+  margin:0 auto;
+}
+
+/* ─────────────────────────────
+   8. CTA
 ───────────────────────────── */
 .cta-section{
   position:relative;overflow:hidden;
@@ -503,6 +529,44 @@ footer a:hover{color:var(--accent)}
 }
 .trust-inner strong{color:var(--text2);font-weight:600}
 .trust-dot{color:var(--dim);user-select:none}
+.trust-inner--framed{
+  flex-direction:column;
+  align-items:stretch;
+  text-align:left;
+  gap:18px;
+}
+.trust-strip-lead{
+  margin:0;
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:0.11em;
+  text-transform:uppercase;
+  color:var(--dim);
+  text-align:center;
+}
+.trust-strip-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px 24px;
+  width:100%;
+}
+.trust-strip-item{
+  font-size:13px;
+  line-height:1.5;
+  color:var(--muted);
+  padding:16px 18px;
+  border-radius:12px;
+  border:1px solid var(--border);
+  background:var(--surface);
+}
+.trust-strip-item strong{
+  display:block;
+  font-family:'Outfit',sans-serif;
+  font-size:14px;
+  font-weight:700;
+  color:var(--text2);
+  margin-bottom:8px;
+}
 
 @media(max-width:900px){
   nav{padding:0 24px}
@@ -521,6 +585,8 @@ footer a:hover{color:var(--accent)}
   .pipe-arr{transform:rotate(90deg)}
   footer{flex-direction:column;gap:16px;text-align:center}
   .trust-inner{flex-direction:column;text-align:center;gap:8px}
+  .trust-strip-grid{grid-template-columns:1fr}
+  .trust-strip-item{text-align:center}
 }
 
 /* Inlined chip demo (no iframe — works on GitHub Pages as a single file) */
@@ -710,7 +776,7 @@ footer a:hover{color:var(--accent)}
       <span class="blink">●</span> Friday · 23:47 · Alert received
     </div>
     <p class="scenario-text">
-      Duty engineer <strong>Ivan</strong> sees hall averages in range — but rack A-14 inlet crept +4°C over 48h. The CDU was still on a <strong>static setpoint</strong>; chilled water couldn't follow the AI GPU load. The CDU trips. Cooling plant lags; a thermal cascade starts. Dashboards stayed <strong>green</strong> on coarse metrics.
+      Duty engineer <strong>James</strong> sees hall averages in range — but rack A-14 inlet crept +4°C over 48h. The CDU was still on a <strong>static setpoint</strong>; chilled water couldn't follow the AI GPU load. The CDU trips. Cooling plant lags; a thermal cascade starts. Dashboards stayed <strong>green</strong> on coarse metrics.
       <br><br>
       MTTR: <strong>4.2 hours.</strong> Revenue impact: <strong>$10M.</strong> Thermal stress on adjacent racks had been building for <strong>six weeks</strong> — invisible without per-rack temperature &amp; cooling telemetry tied to operations.
     </p>
@@ -744,39 +810,7 @@ footer a:hover{color:var(--accent)}
 <div class="divider"></div>
 
 <!-- ═══════════════════════════════════════════
-     SECTION 3 — WHY NOW
-═══════════════════════════════════════════ -->
-<div class="section">
-  <div class="section-label reveal">Why Now</div>
-  <h2 class="section-title reveal delay-1">Three forces in <strong>2025–2026</strong><br>that overload temperature &amp; cooling ops.</h2>
-  <p class="section-sub reveal delay-2">Higher kW per rack means smaller thermal margin — and higher cost when cooling lags even once.</p>
-
-  <div class="whynow-grid">
-    <div class="wn-card reveal delay-1">
-      <div class="wn-icon">⚡</div>
-      <div class="wn-title">Thermal density per m²</div>
-      <div class="wn-desc">GPU and AI racks push 150–300 kW in the same footprint legacy gear used for 15 kW. Hot spots form faster; hall averages hide dangerous deltas at the rack face.</div>
-      <span class="wn-stat">↑ 10–15× heat density vs 2025 baseline</span>
-    </div>
-    <div class="wn-card reveal delay-2">
-      <div class="wn-icon">🔄</div>
-      <div class="wn-title">24/7 cooling load</div>
-      <div class="wn-desc">Inference runs flat-out. Chillers and CDUs see steady high thermal load — not the old batch peaks. Cooling plants must track minute-by-minute heat, not shift-level averages.</div>
-      <span class="wn-stat">Sustained thermal load · 2025–2026 fleets</span>
-    </div>
-    <div class="wn-card reveal delay-3">
-      <div class="wn-icon">🏗️</div>
-      <div class="wn-title">New builds, green ops teams</div>
-      <div class="wn-desc">Sovereign AI and regional capacity adds megawatts of white space — often staffed by teams that have never run high-density liquid + air cooling together. Temperature discipline and operations runbooks are the bottleneck.</div>
-      <span class="wn-stat">Major DC capex wave · 2025–2026</span>
-    </div>
-  </div>
-</div>
-
-<div class="divider"></div>
-
-<!-- ═══════════════════════════════════════════
-     SECTION 4 — SOLUTION
+     SECTION 3 — SOLUTION
 ═══════════════════════════════════════════ -->
 <div class="section solution-section">
   <div class="section-label reveal">Solution</div>
@@ -844,7 +878,7 @@ footer a:hover{color:var(--accent)}
 <div class="divider"></div>
 
 <!-- ═══════════════════════════════════════════
-     SECTION 5 — PRODUCT
+     SECTION 4 — PRODUCT
 ═══════════════════════════════════════════ -->
 <div class="section">
   <div class="section-label reveal">Product</div>
@@ -919,7 +953,7 @@ footer a:hover{color:var(--accent)}
 </div>
 
 <!-- ═══════════════════════════════════════════
-     SECTION 6 — KEY METRICS  (dark)
+     SECTION 5 — KEY METRICS  (dark)
 ═══════════════════════════════════════════ -->
 <div class="metrics-section" style="margin-top:0">
   <div class="section" style="max-width:1120px;margin:0 auto">
@@ -951,27 +985,79 @@ footer a:hover{color:var(--accent)}
   </div>
 </div>
 
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 6 — WHY NOW
+═══════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-label reveal">Why Now</div>
+  <h2 class="section-title reveal delay-1">Three forces in <strong>2025–2026</strong><br>that overload temperature &amp; cooling ops.</h2>
+  <p class="section-sub reveal delay-2">Higher kW per rack means smaller thermal margin — and higher cost when cooling lags even once.</p>
+
+  <div class="whynow-grid">
+    <div class="wn-card reveal delay-1">
+      <div class="wn-icon">⚡</div>
+      <div class="wn-title">Thermal density per m²</div>
+      <div class="wn-desc">GPU and AI racks push 150–300 kW in the same footprint legacy gear used for 15 kW. Hot spots form faster; hall averages hide dangerous deltas at the rack face.</div>
+      <span class="wn-stat">↑ 10–15× heat density vs 2025 baseline</span>
+    </div>
+    <div class="wn-card reveal delay-2">
+      <div class="wn-icon">🔄</div>
+      <div class="wn-title">24/7 cooling load</div>
+      <div class="wn-desc">Inference runs flat-out. Chillers and CDUs see steady high thermal load — not the old batch peaks. Cooling plants must track minute-by-minute heat, not shift-level averages.</div>
+      <span class="wn-stat">Sustained thermal load · 2025–2026 fleets</span>
+    </div>
+    <div class="wn-card reveal delay-3">
+      <div class="wn-icon">🏗️</div>
+      <div class="wn-title">New builds, green ops teams</div>
+      <div class="wn-desc">Sovereign AI and regional capacity adds megawatts of white space — often staffed by teams that have never run high-density liquid + air cooling together. Temperature discipline and operations runbooks are the bottleneck.</div>
+      <span class="wn-stat">Major DC capex wave · 2025–2026</span>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
 <div class="trust-strip reveal">
-  <div class="trust-inner">
-    <span><strong>Temperature</strong> · rack &amp; hall · ΔT · BMS handoff</span>
-    <span class="trust-dot" aria-hidden="true">·</span>
-    <span><strong>Cooling</strong> · CRAC/CDU · chilled plant · setpoint APIs</span>
-    <span class="trust-dot" aria-hidden="true">·</span>
-    <span><strong>Operations</strong> · O&amp;M · CMMS · shift-ready runbooks</span>
+  <div class="trust-inner trust-inner--framed">
+    <p class="trust-strip-lead">Where Nexus DC sits in the stack</p>
+    <div class="trust-strip-grid">
+      <div class="trust-strip-item">
+        <strong>Thermal picture</strong>
+        Rack and hall temperatures, ΔT, and BMS-class signals in one view—so “green” hall averages don’t hide inlet drift at the rack face.
+      </div>
+      <div class="trust-strip-item">
+        <strong>Cooling in context</strong>
+        CRAC/CDU, chilled plant, and setpoints read next to floor heat—not a siloed plant screen the shift forgets when an incident starts.
+      </div>
+      <div class="trust-strip-item">
+        <strong>Built for operators</strong>
+        Handoffs to O&amp;M and CMMS: predictions show up as queueable work and runbook-friendly steps—not orphan analytics.
+      </div>
+    </div>
   </div>
 </div>
 
 <!-- ═══════════════════════════════════════════
-     SECTION 7 — CTA
+     SECTION 7 — CLOSING ARGUMENT
+═══════════════════════════════════════════ -->
+<div class="closing-arg-section reveal">
+  <h2 class="closing-arg-title">Cut maintenance spend and unplanned work by acting on thermal risk before it becomes an outage.</h2>
+  <p class="closing-arg-lead">Teams using predictive thermal and cooling signals typically redirect a large share of O&amp;M effort from firefighting to planned work — in pilots we have seen up to <strong>~50%</strong> reduction in avoidable corrective maintenance and emergency plant runs when failures are anticipated rather than reacted to. Your mileage depends on fleet age and telemetry depth; we’ll quantify it on your data in a 15-minute session.</p>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 8 — CTA
 ═══════════════════════════════════════════ -->
 <div class="cta-section">
   <div class="cta-inner reveal">
     <div class="cta-tag">Nexus DC · 2025–2026 · by Unimatch</div>
-    <h2 class="cta-title">See it working on your fleet data.</h2>
-    <p class="cta-sub">15-minute demo. No integration required. Bring your telemetry export and we'll show you live predictions on your own racks.</p>
+    <h2 class="cta-title">See how it works on your fleet data.</h2>
+    <p class="cta-sub">15-minute demo. No integration required. Bring a telemetry export and we’ll walk through live predictions on your racks — what we show, how models use your signals, and what ops would do next.</p>
     <div class="cta-btns">
       <a href="https://t.me/paalexey" target="_blank" class="btn-white">
-        Book in Telegram
+        Book a 15-min demo
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
       <a href="mailto:druslaexey@gmail.com" class="btn-outline-white">
